@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmdp.mapper.BlogMapper">
+    <!--public List<User> getUser(List listId);-->
+    <select id="getUserById" resultType="user">
+        select nick_name,icon,id from tb_user
+        where id in
+        <foreach collection="list" item="item" index="0" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        order by field ( id,
+        <foreach collection="list" item="item" index="0"  separator=",">
+            #{item}
+        </foreach>
+        )
+    </select>
+
+</mapper>
